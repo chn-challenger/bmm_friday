@@ -1,7 +1,4 @@
 require 'sinatra/base'
-# require File.join(File.dirname(__FILE__), 'models', 'link.rb')
-
-require './app/models/link'
 require 'data_mapper'
 require './app/data_mapper_setup'
 
@@ -14,7 +11,7 @@ class BookManager < Sinatra::Base
   end
 
   post '/links' do
-    @link = Link.create(url: params[:title], title: params[:url])
+    @link = Link.create(url: params[:url], title: params[:title])
     redirect to('/links')
   end
 
