@@ -1,4 +1,7 @@
+require 'spec_helper'
+
 feature 'Viewing links' do
+
   scenario 'I can see existing links on the links page' do
     Link.new(url: 'http://www.makersacademy.com', title: 'Makers Academy')
     visit '/links'
