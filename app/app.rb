@@ -15,10 +15,13 @@ class BookManager < Sinatra::Base
   post '/links' do
     link = Link.create(url: params[:url], title: params[:title]) #1.Create a Link
 
-    tag = Tag.create(name: params[:tag]) #2. Create a tag for the Link
+    tag_name = params[:tags].split(" ")
+    tag_name.each do |name|
+      tag = Tag.create(name: name) #2. Create a tag for the Link
 
-    link.tags << tag #3. Adding the tag to the link's DataMapper collection
-    link.save #4. Saving the link
+      link.tags << tag #3. Adding the tag to the link's DataMapper collection
+      link.save #4. Saving the link
+    end
 
     redirect to('/links')
   end

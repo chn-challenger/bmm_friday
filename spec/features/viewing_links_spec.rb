@@ -32,7 +32,6 @@ feature 'Viewing links' do
 
   scenario 'I can filter links by tag' do
     visit '/tags/bubbles'
-    save_and_open_page
     within 'ul#links' do
       expect(page).not_to have_content('Makers Academy')
       expect(page).not_to have_content('Code.org')
