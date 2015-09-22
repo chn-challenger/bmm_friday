@@ -11,7 +11,7 @@ class BookManager < Sinatra::Base
   end
 
   post '/links' do
-    @link = Link.create(url: params[:url], title: params[:title])
+    @link = Link.create(url: params[:url], title: params[:title], tags: params[:tag])
     redirect to('/links')
   end
 
