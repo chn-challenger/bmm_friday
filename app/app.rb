@@ -4,9 +4,9 @@ require './app/data_mapper_setup'
 
 
 class BookManager < Sinatra::Base
-
   run! if app_file == $PROGRAM_NAME
-
+  enable :sessions
+  set :session_secret, 'super secret'
   set :views, proc { File.join(root, 'views') }
 
   get '/links' do
@@ -15,21 +15,14 @@ class BookManager < Sinatra::Base
   end
 
   post '/links' do
-    link = Link.create(url: params[:url], title: params[:title]) #1.Create a Link
-
-    #2. Create a tag for the Link
+    link = Link.create(url: params[:url], title: params[:title])
     tag_name = params[:tags].split(" ")
-
     tag_name.each do |name|
-      #3. Adding the tag to the link's DataMapper collection
       link.tags << Tag.create(name: name)
-      #4. Saving the link
       link.save
     end
-
     redirect to('/links')
   end
-
 
   get '/links/new' do
     erb :'links/new'
@@ -46,13 +39,20 @@ class BookManager < Sinatra::Base
   end
 
   post '/users' do
-    User.create(email: params[:email], password: params[:password])
+    user = User.create(email: params[:email], password: params[:password])
+    session[:user_id] = user.id
     redirect '/users'
   end
 
   get '/users' do
-    @email = User.first.email
+    @email = current_user(session[:user_id]).email
     erb :'users/logged_in'
+  end
+
+  helpers do
+    def current_user user_id
+        User.get(user_id)
+    end
   end
 
 end
