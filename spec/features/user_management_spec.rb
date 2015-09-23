@@ -10,6 +10,7 @@ feature 'User sign up' do
   end
 
   def sign_up(email: "alice@example.com",
+              email_confirmation: "alice@example.com",
               password: 'oranges!',
               password_confirmation: 'oranges!')
 
@@ -17,6 +18,7 @@ feature 'User sign up' do
       visit '/users/new'
       expect(page.status_code).to eq 200
       fill_in :email, with: email
+      fill_in :email_confirmation, with: email_confirmation
       fill_in :password, with: password
       fill_in :password_confirmation, with: password_confirmation
       click_button "Sign up"
@@ -24,6 +26,10 @@ feature 'User sign up' do
 
   scenario ' requires a matching passward confirmation' do
     expect {sign_up(password_confirmation: 'wrong') }.not_to change(User, :count)
+  end
+
+  scenario 'not alice' do
+    expect { sign_up(email_confirmation: 'not_alice@example.com') }.not_to change(User, :count)
   end
 
 
