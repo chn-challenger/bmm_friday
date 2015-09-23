@@ -45,8 +45,8 @@ class BookManager < Sinatra::Base
   end
 
   get '/users' do
-    @email = current_user(session[:user_id]).email
-    erb :'users/logged_in'
+    current_user(session[:user_id]).email
+    erb :'heading'
   end
 
   helpers do
