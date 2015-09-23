@@ -1,5 +1,6 @@
 require 'spec_helper'
 require 'launchy'
+require 'byebug'
 feature 'User sign up' do
 
   scenario 'I can sign up as a new user' do
@@ -12,7 +13,7 @@ feature 'User sign up' do
               password: 'oranges!',
               password_confirmation: 'oranges!')
 
-      p password_confirmation
+
       visit '/users/new'
       expect(page.status_code).to eq 200
       fill_in :email, with: email
