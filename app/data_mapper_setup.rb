@@ -1,6 +1,6 @@
 require 'data_mapper'
 
-env = ENV['RACK_ENV'] || 'test'
+env = ENV['RACK_ENV'] || 'development'
 
 # we are telling the datamapper to use a postgres database on localhost.
 # The name will be 'boommark_manager_test' or 'bookmark_manager_development'

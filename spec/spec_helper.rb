@@ -1,3 +1,5 @@
+ENV['RACK_ENV'] = 'test'
+
 require 'capybara/rspec'
 require 'data_mapper'
 require 'database_cleaner'
