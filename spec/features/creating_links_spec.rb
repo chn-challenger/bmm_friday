@@ -1,3 +1,5 @@
+require 'spec_helper'
+
 feature "Creating links" do
 
   scenario 'there are no links in the database at the start of the test' do

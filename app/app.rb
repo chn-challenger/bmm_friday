@@ -40,4 +40,13 @@ class BookManager < Sinatra::Base
     @links = tag ? tag.links : []
     erb :'links/index'
   end
+
+  get '/users/new' do
+    erb :'users/new'
+  end
+
+  post '/users' do
+    
+  end
+
 end
