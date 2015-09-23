@@ -10,8 +10,10 @@ gem 'dm-postgres-adapter'
 gem 'sinatra'
 
 group :test do
+  gem 'byebug'
+
   gem 'capybara'
+  gem 'dm-validations'
   gem 'launchy'
   gem 'rspec'
-  gem 'byebug'
 end
