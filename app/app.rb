@@ -46,7 +46,13 @@ class BookManager < Sinatra::Base
   end
 
   post '/users' do
-    
+    User.create(email: params[:email], password: params[:password])
+    redirect '/users'
+  end
+
+  get '/users' do
+    @email = User.first.email
+    erb :'users/logged_in'
   end
 
 end
