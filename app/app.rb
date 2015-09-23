@@ -4,7 +4,8 @@ require './app/data_mapper_setup'
 
 
 class BookManager < Sinatra::Base
-  run! if app_file == $0
+
+  run! if app_file == $PROGRAM_NAME
 
   set :views, proc { File.join(root, 'views') }
 
