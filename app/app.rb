@@ -45,13 +45,12 @@ class BookManager < Sinatra::Base
   end
 
   get '/users' do
-    current_user(session[:user_id]).email
-    erb :'heading'
+    erb :name
   end
 
   helpers do
-    def current_user user_id
-        User.get(user_id)
+    def current_user
+        User.get(session[:user_id])
     end
   end
 
