@@ -4,7 +4,7 @@ require './app/helpers/sign_up'
 feature 'User sign up' do
 
   scenario 'I can sign up as a new user' do
-    user = create :user
+    user = build :user
     expect { sign_up(user) }.to change(User, :count).by(1)
     expect(page).to have_content "Welcome, alice@example.com"
     expect(User.first.email).to eq "alice@example.com"
@@ -20,8 +20,7 @@ feature 'User sign up' do
   end
 
   scenario 'requires a matching password confirmation' do
-    user = create(:user, password_confirmation: 'wrong')
-
+    user = build(:user, password_confirmation: 'wrong')
     expect { sign_up(user) }.not_to change(User, :count)
     expect(current_path).to eq('/users') #current_path is a helper
                                          # provided by Capybara
@@ -29,8 +28,7 @@ feature 'User sign up' do
   end
 
   scenario 'cannot sign up when the email field is empty' do
-    user = create(:user, email: '')
-
+    user = build(:user, email: '')
     expect { sign_up(user) }.not_to change(User, :count)
     expect(current_path).to eq('/users')
     # expect(page).to have_content "Please enter an email address"
@@ -38,8 +36,6 @@ feature 'User sign up' do
 
   scenario 'I cannot sign up with an existing email' do
     user = create(:user)
-
-    sign_up(user)
     expect { sign_up(user) }.to change(User, :count).by(0)
     # expect(page).to have_content "Email is already taken"
   end

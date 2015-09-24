@@ -17,4 +17,5 @@ group :test do
   gem 'factory_girl'
   gem 'launchy'
   gem 'rspec'
+  gem 'pry'
 end
