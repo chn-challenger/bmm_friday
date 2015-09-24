@@ -9,7 +9,7 @@ class BookManager < Sinatra::Base
   run! if app_file == $PROGRAM_NAME
 
   enable :sessions
-  
+
   set :session_secret, 'super secret'
   set :views, proc { File.join(root, 'views') }
 
@@ -43,16 +43,20 @@ class BookManager < Sinatra::Base
   end
 
   post '/users' do
+    #we just initialize the object
+    #without saving it. It may be invalid
     user = User.create(email: params[:email],
     email_confirmation: params[:email_confirmation],
     password: params[:password],
     password_confirmation: params[:password_confirmation])
-    session[:user_id] = user.id
-    redirect '/users'
-  end
-
-  get '/users' do
-    erb :name
+    if user.save # #save return true or false depending on whther the
+      #module is successfully saved to the database
+      session[:user_id] = user.id
+      redirect to '/links'
+      #if it is not valid, we'll render the sign up form again
+    else
+      erb :'users/new'
+    end
   end
 
 end
