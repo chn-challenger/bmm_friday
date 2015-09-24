@@ -15,5 +15,4 @@ describe User do
     expect(authenticate_user).to be_nil
   end
 
-
 end
