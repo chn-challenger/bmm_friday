@@ -10,13 +10,11 @@ feature 'User sign up' do
   end
 
   def sign_up(email: "alice@example.com",
-              email_confirmation: "alice@example.com",
               password: 'oranges!',
               password_confirmation: 'oranges!')
       visit '/users/new'
       expect(page.status_code).to eq 200
       fill_in :email, with: email
-      fill_in :email_confirmation, with: email_confirmation
       fill_in :password, with: password
       fill_in :password_confirmation, with: password_confirmation
       click_button "Sign up"
@@ -27,10 +25,6 @@ feature 'User sign up' do
     expect(current_path).to eq('/users') #current_path is a helper
                                          # provided by Capybara
     expect(page).to have_content 'Password and confirmation passwod do not match'
-  end
-
-  scenario 'not alice' do
-    expect { sign_up(email_confirmation: 'not_alice@example.com') }.not_to change(User, :count)
   end
 
 end

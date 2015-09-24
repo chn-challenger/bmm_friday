@@ -46,7 +46,6 @@ class BookManager < Sinatra::Base
     #we just initialize the object
     #without saving it. It may be invalid
     user = User.create(email: params[:email],
-    email_confirmation: params[:email_confirmation],
     password: params[:password],
     password_confirmation: params[:password_confirmation])
     if user.save # #save return true or false depending on whther the
