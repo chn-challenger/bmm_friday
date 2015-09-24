@@ -13,7 +13,6 @@ class User
   attr_accessor :email_confirmation
 
   validates_confirmation_of :password
-
   validates_confirmation_of :email
 
   def password=(password)

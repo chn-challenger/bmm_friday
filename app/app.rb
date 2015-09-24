@@ -1,11 +1,15 @@
 require 'sinatra/base'
 require 'data_mapper'
 require './app/data_mapper_setup'
-
+require './app/helpers/current_user'
 
 class BookManager < Sinatra::Base
+  include CurrentUser
+
   run! if app_file == $PROGRAM_NAME
+
   enable :sessions
+  
   set :session_secret, 'super secret'
   set :views, proc { File.join(root, 'views') }
 
@@ -49,12 +53,6 @@ class BookManager < Sinatra::Base
 
   get '/users' do
     erb :name
-  end
-
-  helpers do
-    def current_user
-        User.get(session[:user_id])
-    end
   end
 
 end
