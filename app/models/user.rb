@@ -22,4 +22,7 @@ class User
     self.password_digest = BCrypt::Password.create(password)
   end
 
+  def self.authenticate(email, password)
+  end
+
 end
