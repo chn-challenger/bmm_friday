@@ -4,6 +4,7 @@ require 'capybara/rspec'
 require 'data_mapper'
 require 'database_cleaner'
 require 'factory_girl'
+require './spec/factories/user'
 
 require File.join(File.dirname(__FILE__), '..', 'app', 'app.rb')
 
