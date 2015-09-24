@@ -12,7 +12,7 @@ describe User do
 
   it 'does not authenticate when given an incorrect password' do
     authenticated_user = User.authenticate(fake_user.email, fake_user.password)
-    expect(authenticate_user).to be_nil
+    expect(authenticated_user).to be_nil
   end
 
 end
