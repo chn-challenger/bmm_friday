@@ -12,6 +12,8 @@ class User
   attr_accessor :password_confirmation
 
   validates_confirmation_of :password
+
+  #as email includes required: true the code below becomes unnecessary
   validates_presence_of :email
 
 

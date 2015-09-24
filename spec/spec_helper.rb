@@ -3,13 +3,17 @@ ENV['RACK_ENV'] = 'test'
 require 'capybara/rspec'
 require 'data_mapper'
 require 'database_cleaner'
-
+require 'factory_girl'
 
 require File.join(File.dirname(__FILE__), '..', 'app', 'app.rb')
 
 require File.join(File.dirname(__FILE__), '..', 'app', 'data_mapper_setup')
 
 Capybara.app = BookManager
+
+RSpec.configure do |config|
+  config.include FactoryGirl::Syntax::Methods
+end
 
 RSpec.configure do |config|
 
