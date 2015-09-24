@@ -23,6 +23,7 @@ class User
   end
 
   def self.authenticate(email, password)
+    User.first(email: email)
   end
 
 end
