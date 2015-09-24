@@ -57,7 +57,7 @@ class BookManager < Sinatra::Base
       redirect to '/links'
       #if it is not valid, we'll render the sign up form again
     else
-      flash.now[:notice] = "Password and confirmation password do not match"
+      flash.now[:errors] = @user.errors.full_messages
       erb :'users/new'
     end
   end
