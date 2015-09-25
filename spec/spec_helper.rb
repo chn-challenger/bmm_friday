@@ -5,6 +5,7 @@ require 'data_mapper'
 require 'database_cleaner'
 require 'factory_girl'
 require './spec/factories/user'
+require './app/helpers/session_user'
 
 require File.join(File.dirname(__FILE__), '..', 'app', 'app.rb')
 
@@ -13,10 +14,9 @@ require File.join(File.dirname(__FILE__), '..', 'app', 'data_mapper_setup')
 Capybara.app = BookManager
 
 RSpec.configure do |config|
-  config.include FactoryGirl::Syntax::Methods
-end
 
-RSpec.configure do |config|
+  config.include FactoryGirl::Syntax::Methods
+  config.include SessionUser
 
   config.before(:suite) do
     DatabaseCleaner.strategy = :transaction
