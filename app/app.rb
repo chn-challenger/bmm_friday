@@ -95,4 +95,20 @@ class BookManager < Sinatra::Base
       redirect to('/links')
   end
 
+  get '/users/password_reset' do
+    @user = User.first(email: session[:user_pwr_email])
+    erb :'users/password_reset'
+  end
+
+  post '/users/password_reset' do
+    # []+{} if params[:email].nil?
+    user = User.first(email: params[:email])
+    # []+{} if user.class != User
+    user.password_token = "DMFYOMLYCESXAFPYFRATHPTKLULDPOVIHUIOZIIPSRLCQV"
+    user.save
+    # user.hellooo
+    session[:user_pwr_email] = user.email
+    redirect 'users/password_reset'
+  end
+
 end
