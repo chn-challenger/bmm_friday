@@ -9,6 +9,7 @@ gem 'database_cleaner'
 gem 'dm-postgres-adapter'
 gem 'sinatra'
 gem 'sinatra-flash'
+gem 'sinatra-partial'
 
 group :test do
   gem 'byebug'

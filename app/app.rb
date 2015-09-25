@@ -1,21 +1,27 @@
 require 'data_mapper'
 require 'sinatra/base'
 require 'sinatra/flash'
+require 'sinatra/partial'
 require './app/data_mapper_setup'
 require './app/helpers/current_user'
 
 class BookManager < Sinatra::Base
   include CurrentUser
 
+  register Sinatra::Flash
+  register Sinatra::Partial
+
   run! if app_file == $PROGRAM_NAME
 
   enable :sessions
-  register Sinatra::Flash
+  enable :partial_underscores
+
 
   use Rack::MethodOverride
 
   set :session_secret, 'super secret'
   set :views, proc { File.join(root, 'views') }
+  set :partial_template_engine, :erb
 
   get '/' do
     redirect '/links'
