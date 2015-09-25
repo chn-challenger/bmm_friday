@@ -11,7 +11,7 @@ require File.join(File.dirname(__FILE__), '..', 'app', 'app.rb')
 
 require File.join(File.dirname(__FILE__), '..', 'app', 'data_mapper_setup')
 
-Capybara.app = BookManager
+Capybara.app = TheApp::BookManager
 
 RSpec.configure do |config|
 
