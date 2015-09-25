@@ -12,8 +12,14 @@ class BookManager < Sinatra::Base
   enable :sessions
   register Sinatra::Flash
 
+  use Rack::MethodOverride
+
   set :session_secret, 'super secret'
   set :views, proc { File.join(root, 'views') }
+
+  get '/' do
+    redirect '/links'
+  end
 
   get '/links' do
     @links = Link.all
@@ -75,6 +81,12 @@ class BookManager < Sinatra::Base
       flash.now[:errors] = ['The email or password is incorrect']
       erb :'sessions/new'
     end
+  end
+
+  delete '/sessions' do
+      session[:user_id] = nil
+      flash[:notice] = 'Goodbye!'
+      redirect to('/links')
   end
 
 end
